@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Mapper파일을 구성하기 위한 Doctype 설정 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<!-- 서비스 인터페이스를 namespace로 지정한다. -->
+<mapper namespace="com.edu.springboot.jdbc.IMemberService">
+	<!-- 회원목록 출력하기:parameterType은 해당 메소드에서는
+			필요하지 않지만, 검색이나 페이징 기능을 위해서
+			파라미터가 필요하므로 기본적으로 기술하는 것이 좋다.
+			select를 통해 인출한 레코드를 DTO에 저장한 후
+			List컬렉션에 추가하여 컨트롤러로 반환한다. -->
+	<select id="select"
+		parameterType="com.edu.springboot.jdbc.MemberDTO"
+		resultType="com.edu.springboot.jdbc.MemberDTO">
+		select * from member order by regidate desc	
+	</select>
+	
+	<!-- insert, update, delete의 경우 적용된 행의 개수를 반환하므로
+	resultType은 별도로 명시하지 않아도 된다.
+	폼값이 저장된 parameterType만 명시하면 된다.
+	만약 parameterType을 생략한다면 param1, param2와 같이 명시하거나
+	@Param어노테이션을 통해 별칭을 부여할 수 있다. -->
+	<insert id="insert"
+		parameterType="com.edu.springboot.jdbc.MemberDTO">
+		insert into member (id, pass, name) values
+			(#{id}, #{pass}, #{name})	
+	</insert>
+	
+	<!-- 수정처리
+	기존의 게시물을 인출한다. -->
+	<select id="selectOne"
+		parameterType="com.edu.springboot.jdbc.MemberDTO"
+		resultType="com.edu.springboot.jdbc.MemberDTO">
+		select * from member where id=#{id}	
+	</select>
+	
+	<!-- 기존의 게시물을 수정한다. -->
+	<update id="update"
+		parameterType="com.edu.springboot.jdbc.MemberDTO">
+		update member set pass=#{pass},
+			name=#{name} where id=#{id}	
+	</update>
+	
+	<!-- 삭제처리 -->
+	<delete id="delete"
+		parameterType="com.edu.springboot.jdbc.MemberDTO">
+		delete from member where id=#{id}	
+	</delete>
+	
+	<select id="login" resultType="com.edu.springboot.jdbc.MemberDTO">
+		select * from member where id=#{param1} and pass=#{param2}
+	</select>
+</mapper>

@@ -4,17 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>TICKETPARK</title>
+<title>회원가입</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="로고.png" rel="shortcut icon" type="image/x-icon">
 <style>
-.fakeimg {
-  height: 730px;
-  background: #aaa;
-}
+
 </style>
 </head>
 <body>
@@ -34,7 +31,7 @@
 	        <a class="nav-link" href="ticket.do">예매확인/취소</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="regist.do">회원가입</a>
+	        <a class="nav-link active" href="regist.do">회원가입</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="list.do">회원리스트(관리자)</a>
@@ -45,14 +42,14 @@
 	
 	<div class="p-5 bg-primary text-white text-center">
 	  <h1>TICKETPARK</h1>
-	  <p>국내 4대스포츠 통합 티켓 예매처(야구, 축구, 농구, 배구)</p> 
+	  <p>국내 4대스포츠 통합 티켓 예매처(야구, 축구, 농구, 배구)</p>
 	</div>
 	
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	  <div class="container-fluid">
 	    <ul class="navbar-nav">
 	      <li class="nav-item">
-	        <a class="nav-link active" href="/">홈</a>
+	        <a class="nav-link" href="/">홈</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="baseball.do">야구</a>
@@ -83,12 +80,25 @@
 	<div class="container mt-5">
 	  <div class="row">
 	    <div class="col-sm-12">
-	      <h2>지금껏 듣지도 보지도 못한 획기적인 웹 페이지가 왔다!</h2>
-	      <h5>그건 바로 스포츠 통합 예매 사이트!!!</h5>
-	      <div class="fakeimg">
-	      	<img src="스포츠.png" alt="" />
-	      </div>
-	      <p>최고의 서비스로 모시겠습니다.</p>
+	      <h2>회원가입</h2>
+			<!-- 등록폼에서 post로 전송시 컨트롤러에서 insert처리를 한다. -->
+			<form action="regist.do" method="post">
+				<table border="1">
+					<tr>
+						<th>아이디</th>
+						<td><input type="text" name="id" value=""/></td>
+					</tr>
+					<tr>
+						<th>패스워드</th>
+						<td><input type="text" name="pass" value=""/></td>
+					</tr>
+					<tr>
+						<th>이름</th>
+						<td><input type="text" name="name" value=""/></td>
+					</tr>
+				</table>
+				<input type="submit" value="전송하기"/>
+			</form>
 	    </div>
 	  </div>
 	</div>

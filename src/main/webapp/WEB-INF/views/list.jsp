@@ -1,20 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>TICKETPARK</title>
+<title>회원리스트(관리자)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="로고.png" rel="shortcut icon" type="image/x-icon">
 <style>
-.fakeimg {
-  height: 730px;
-  background: #aaa;
-}
+
 </style>
 </head>
 <body>
@@ -37,7 +35,7 @@
 	        <a class="nav-link" href="regist.do">회원가입</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="list.do">회원리스트(관리자)</a>
+	        <a class="nav-link active" href="list.do">회원리스트(관리자)</a>
 	      </li>
 	    </ul>
 	  </div>
@@ -45,14 +43,14 @@
 	
 	<div class="p-5 bg-primary text-white text-center">
 	  <h1>TICKETPARK</h1>
-	  <p>국내 4대스포츠 통합 티켓 예매처(야구, 축구, 농구, 배구)</p> 
+	  <p>국내 4대스포츠 통합 티켓 예매처(야구, 축구, 농구, 배구)</p>
 	</div>
 	
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	  <div class="container-fluid">
 	    <ul class="navbar-nav">
 	      <li class="nav-item">
-	        <a class="nav-link active" href="/">홈</a>
+	        <a class="nav-link" href="/">홈</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="baseball.do">야구</a>
@@ -83,12 +81,33 @@
 	<div class="container mt-5">
 	  <div class="row">
 	    <div class="col-sm-12">
-	      <h2>지금껏 듣지도 보지도 못한 획기적인 웹 페이지가 왔다!</h2>
-	      <h5>그건 바로 스포츠 통합 예매 사이트!!!</h5>
-	      <div class="fakeimg">
-	      	<img src="스포츠.png" alt="" />
-	      </div>
-	      <p>최고의 서비스로 모시겠습니다.</p>
+	      <h2>회원리스트(Mybatis)</h2>
+			<table border="1">
+				<tr>
+					<th>아이디</th>
+					<th>패스워드</th>
+					<th>이름</th>
+					<th>가입일</th>
+					<th></th>
+				</tr>
+				<!-- 컨트롤러에서 Model에 저장한 List의 개수만큼
+				반복하여 회원목록을 출력한다.
+				varStatus은 실제 반복에 관련된 여러가지 정보를 반환하므로
+				가상번호 등을 출력할때 사용할 수 있다. -->
+				<c:forEach items="${memberList }" var="row" varStatus="loop">
+					<tr>
+						<td>${row.id }</td>
+						<td>${row.pass }</td>
+						<td>${row.name }</td>
+						<td>${row.regidate }</td>
+						<td>
+							<a href="edit.do?id=${row.id }">수정</a>
+							<a href="delete.do?id=${row.id }">삭제</a>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+			<a href="regist.do">회원 등록</a>
 	    </div>
 	  </div>
 	</div>
